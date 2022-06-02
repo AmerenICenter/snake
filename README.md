@@ -41,3 +41,4 @@ snake.run()
 
 # Authors
 Xander Pero
+Jash Parekh
