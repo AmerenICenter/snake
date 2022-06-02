@@ -1,5 +1,5 @@
 # from transformers import WavLMModel
-from torch import segment_reduce
+# from torch import segment_reduce
 from food import food
 from snake import snake
 from enum import Enum
@@ -103,7 +103,7 @@ while running:
     snake_x += x_change
     snake_y += y_change
     
-    food1 = food([food_x, food_y], SCREEN)
+    food1 = food([food_x, food_y], SCREEN, 12)
     food1.draw()
     
     if int(snake_x) == int(food_x) & int(snake_y) == int(food_y): 
