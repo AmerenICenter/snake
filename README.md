@@ -40,7 +40,8 @@ snake.run()
 
 
 # Authors
+Archit Myadam,
+David An,
+Jash Parekh,
+Myles Ream,
 Xander Pero
-Jash Parekh
-Myles Ream
-Archit Myadam
