@@ -47,13 +47,13 @@ def checkKeyPress():
     # if collide with self
 title = True
 running = True
+x=10
+y = 10
 
 while running:
     # if (title): 
     #     pass
     # else: 
-    x = 10
-    y = 10
     pygame.time.delay(100)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -67,11 +67,11 @@ while running:
         
     SCREEN.fill(BLACK)
     
-    for sprite in snake_group.sprites(): 
-        
+    # for sprite in snake_group.sprites(): 
+    x +=15
+    y+=15
     pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,30,30))
-    x +=100
-    y+=100
+   
     pygame.display.update()
     
 
