@@ -3,7 +3,6 @@
 from food import food
 from snake import snake
 from enum import Enum
-import numpy as np
 
 import random
 import pygame
@@ -31,10 +30,6 @@ SNAKE_WIDTH = 12
 difficulty = 'easy'
 time_delay = 70
 
-
-# def collide(head_pos, other_pos):
-    # if collide with walls
-    # if collide with self
 title = True
 running = True
 size = SNAKE_WIDTH
@@ -52,22 +47,23 @@ food_obj = food(pos = food_pos, screen = SCREEN, width = size)
 
 def collide(x,y):
     if x == SCREEN_SIZE or y == SCREEN_SIZE or x == -SNAKE_WIDTH or y == -SNAKE_WIDTH:
-        print("Collide Wall")
+        # print("Collide Wall")
         return True
     for block in snake_obj.pos_list[1:]:
         if block == snake_obj.pos_list[0]:
-            print("Collide Self")
+            # print("Collide Self")
             return True
     else:
         return False
 
 def food_collide(x, y, food_x, food_y):
     if x == food_x and y == food_y:
-        print("Eat Food")
+        # print("Eat Food")
         return True
     else:
         return False
 
+name_string = ''
 while running:
     if (title):
         for event in pygame.event.get():
@@ -76,10 +72,10 @@ while running:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     difficulty = 'easy'
-                    time_delay = 70
+                    time_delay = 80
                 elif event.key == pygame.K_2:
                     difficulty = 'medium'
-                    time_delay = 40
+                    time_delay = 50
                 elif event.key == pygame.K_3:
                     difficulty = 'hard'
                     time_delay = 25
@@ -107,19 +103,19 @@ while running:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     if snake_obj.direction != 3:
-                        print("Left")
+                        # print("Left")
                         snake_obj.direction = 2
                 elif event.key == pygame.K_RIGHT:
                     if snake_obj.direction!= 2:
-                        print("RIGHT")
+                        # print("RIGHT")
                         snake_obj.direction = 3
                 elif event.key == pygame.K_UP:
                     if snake_obj.direction != 1:
-                        print("UP")
+                        # print("UP")
                         snake_obj.direction = 0
                 elif event.key == pygame.K_DOWN:
                     if snake_obj.direction != 0:
-                        print("DOWN")
+                        # print("DOWN")
                         snake_obj.direction = 1
 
         # Move snake after direction change

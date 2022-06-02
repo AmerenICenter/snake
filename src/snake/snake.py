@@ -1,7 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
 import random
-import numpy as np
 
 class snake():
 
@@ -40,7 +39,6 @@ class snake():
 
     def eat(self):
         self.pos_list.append(self.last_tail_position)
-        print("position list",self.pos_list)
         self.length += 1
 
     # def draw(self):

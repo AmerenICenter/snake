@@ -1,7 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
 import random
-import numpy as np 
 
 class food(Sprite):
     def __init__(self, pos, screen, width):
