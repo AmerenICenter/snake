@@ -14,6 +14,7 @@ class Direction(Enum):
     RIGHT = 3
 
 # jash bare bones screen code
+
 NAME = input("Enter your name: ")
 pygame.init()
 pygame.font.init()
@@ -125,7 +126,7 @@ while running:
         # Check for wall/snake collisions
         running = not collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
         if not running:
-            with open('score.txt', 'a') as f:
+            with open('score.csv', 'a') as f:
                 f.write(str(SCORE))
                 f.write(', ')
                 f.write(difficulty)
