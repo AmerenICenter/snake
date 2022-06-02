@@ -48,8 +48,8 @@ food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0
 food_obj = food(pos = food_pos, screen = SCREEN, width = size)
 
 def collide(x,y):
-    print(snake_obj.pos_list[0])
-    if x == SCREEN_SIZE - SNAKE_WIDTH or y == SCREEN_SIZE - SNAKE_WIDTH or x == SNAKE_WIDTH or y == SNAKE_WIDTH:
+    print(snake_obj.pos_list)
+    if x == SCREEN_SIZE or y == SCREEN_SIZE or x == -SNAKE_WIDTH or y == -SNAKE_WIDTH:
         print("Collide Wall")
         return True
     for block in snake_obj.pos_list[1:]:
@@ -70,7 +70,7 @@ while running:
     # if (title):
     #     pass
     # else:
-    pygame.time.delay(100)
+    pygame.time.delay(250)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
