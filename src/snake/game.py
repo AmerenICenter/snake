@@ -1,3 +1,4 @@
+# from transformers import WavLMModel
 from food import food
 from snake import snake
 from enum import Enum
@@ -29,34 +30,49 @@ food_group = pygame.sprite.Group()
 
 def checkKeyPress():
     if event.key == pygame.K_LEFT:
+        print("Left")
         pass
     elif event.key == pygame.K_RIGHT:
+        print("ROIGHT")
         pass
     elif event.key == pygame.K_UP: 
+        print("UOP")
         pass 
     elif event.key == pygame.K_DOWN:
+        print("DOWN")
         pass 
 
+# def collide(head_pos, other_pos): 
+    # if collide with walls
+    # if collide with self
 title = True
 running = True
 
 while running:
-    if (title): 
-        pass
-    else: 
-        pygame.time.delay(100)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            if event.type == pygame.KEYDOWN:
-                checkKeyPress() 
-                
-        snake.move() 
-        snake_group.update()
-        food_group.update()
+    # if (title): 
+    #     pass
+    # else: 
+    x = 10
+    y = 10
+    pygame.time.delay(100)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            checkKeyPress() 
             
-        SCREEN.fill(BLACK)
+    # snake.move() 
+    snake_group.update()
+    food_group.update()
         
-        pygame.display.update()
+    SCREEN.fill(BLACK)
+    
+    for sprite in snake_group.sprites(): 
+        
+    pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,30,30))
+    x +=100
+    y+=100
+    pygame.display.update()
+    
 
 pygame.quit()
