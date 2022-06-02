@@ -79,9 +79,9 @@ while running:
         EASY = FONT.render('easy', True, COLOR)
         SCREEN.blit(EASY, (120,120))
         MEDIUM = FONT.render('medium', True, COLOR)
-        SCREEN.blit(MEDIUM, (240,240))
+        SCREEN.blit(MEDIUM, (120,240))
         HARD = FONT.render('hard', True, COLOR)
-        SCREEN.blit(HARD, (360,360))
+        SCREEN.blit(HARD, (120,360))
     else:
         pygame.time.delay(100)
         for event in pygame.event.get():
@@ -132,7 +132,8 @@ while running:
 
         # pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,SNAKE_WIDTH,SNAKE_WIDTH))
 
-        pygame.display.update()
+    # Update screen
+    pygame.display.update()
 
 
 pygame.quit()
