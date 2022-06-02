@@ -20,7 +20,8 @@ pygame.font.init()
 FONT = pygame.font.SysFont('Corbel', 30)
 
 SCREEN_SIZE = 480
-SCREEN = pygame.display.set_mode([SCREEN_SIZE, SCREEN_SIZE])
+EXTRA_SCREEN_SIZE = 540
+SCREEN = pygame.display.set_mode([SCREEN_SIZE, EXTRA_SCREEN_SIZE])
 WIDTH = SCREEN.get_width()
 HEIGHT = SCREEN.get_height()
 COLOR = (255, 255, 255)
@@ -104,7 +105,6 @@ while running:
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                # checkKeyPress()
                 if event.key == pygame.K_LEFT:
                     if snake_obj.direction != 3:
                         print("Left")
@@ -138,16 +138,17 @@ while running:
             food_obj = food(pos = food_pos, screen = SCREEN, width = size)
         else:
             pass
-            #print(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1])
+
         # Update the screen
         SCREEN.fill(BLACK)
+        pygame.draw.rect(SCREEN, (255,0,0), pygame.Rect(0, SCREEN_SIZE, SCREEN_SIZE, 60))
+        SCORE_DISPLAY = FONT.render("Score: " + str(SCORE), True, COLOR)
+        SCREEN.blit(SCORE_DISPLAY, (15, 495))
 
         # Draw snake and food
         for segment in snake_obj.pos_list:
             pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(segment[0], segment[1], SNAKE_WIDTH, SNAKE_WIDTH))
         food_obj.draw()
-
-        # pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,SNAKE_WIDTH,SNAKE_WIDTH))
 
     # Update screen
     pygame.display.update()
