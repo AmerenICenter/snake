@@ -29,7 +29,7 @@ BLACK = (0,0,0)
 SNAKE_WIDTH = 12
 
 difficulty = 'easy'
-time_delay = 100
+time_delay = 70
 
 
 # def collide(head_pos, other_pos):
@@ -76,10 +76,10 @@ while running:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     difficulty = 'easy'
-                    time_delay = 100
+                    time_delay = 70
                 elif event.key == pygame.K_2:
                     difficulty = 'medium'
-                    time_delay = 50
+                    time_delay = 40
                 elif event.key == pygame.K_3:
                     difficulty = 'hard'
                     time_delay = 25
@@ -128,6 +128,9 @@ while running:
         # Check for wall/snake collisions
         running = not collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
         if not running:
+            with open('score.txt', 'a') as f:
+                f.write(str(SCORE))
+                f.write('\n')
             print("You just lost!")
 
         # Check for food collisions
