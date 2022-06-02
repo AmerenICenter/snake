@@ -1,32 +1,41 @@
 from food import food
 from snake import snake
+from enum import Enum
 
 import random 
 import pygame 
 
+class Direction(Enum):
+    UP = 0 
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
+
 # jash bare bones screen code
 pygame.init()
-screen = pygame.display.set_mode([500, 500])
-width = screen.get_width()
-height = screen.get_height()
-color = (255, 255, 255)
+SCREEN = pygame.display.set_mode([500, 500])
+WIDTH = screen.get_width()
+HEIGHT = screen.get_height()
+COLOR = (255, 255, 255)
 
-font = pygame.font.SysFont('Corbel', 30)
-easy = font.render('easy', True, color)
-medium = font.render('medium', True, color)
-hard = font.render('hard', True, color)
+FONT = pygame.font.SysFont('Corbel', 30)
+EASY = FONT.render('easy', True, COLOR)
+MEDIUM = FONT.render('medium', True, COLOR)
+HARD = FONT.render('hard', True, COLOR)
 
-
-running = True
 snake = snake()
 
+def checkKeyPress():
+    keys = pygame.key.get_pressed()
+    keys[]
 
-
+running = True
 while running:
+    pygame.time.delay(100)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    snake.draw(pygame, screen)
-    screen.fill((0, 0, 0))
+    SCREEN.fill((0, 0, 0))
+    pygame.display.update()
 
 pygame.quit()
