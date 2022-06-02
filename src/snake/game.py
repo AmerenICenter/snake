@@ -1,4 +1,5 @@
 # from transformers import WavLMModel
+from torch import segment_reduce
 from food import food
 from snake import snake
 from enum import Enum
@@ -14,11 +15,13 @@ class Direction(Enum):
 
 # jash bare bones screen code
 pygame.init()
-SCREEN = pygame.display.set_mode([500, 500])
+SCREEN_SIZE = 500
+SCREEN = pygame.display.set_mode([SCREEN_SIZE, SCREEN_SIZE])
 WIDTH = SCREEN.get_width()
 HEIGHT = SCREEN.get_height()
 COLOR = (255, 255, 255)
 BLACK = (0,0,0)
+SNAKE_WIDTH = 26
 
 FONT = pygame.font.SysFont('Corbel', 30)
 EASY = FONT.render('easy', True, COLOR)
@@ -40,19 +43,13 @@ y_change = 0
 x = 200
 y = 200
 
-def checkKeyPress():
-    if event.key == pygame.K_LEFT:
-        print("Left")
-        pass
-    elif event.key == pygame.K_RIGHT:
-        print("ROIGHT")
-        pass
-    elif event.key == pygame.K_UP: 
-        print("UOP")
-        pass 
-    elif event.key == pygame.K_DOWN:
-        print("DOWN")
-        pass 
+snake = snake()
+
+def collide(x,y):
+    if x == SCREEN_SIZE - WIDTH or y == SCREEN_SIZE - WIDTH or x == WIDTH or y == WIDTH: 
+        print("Collide")
+    
+    
 
 while running:
     # if (title): 
@@ -84,19 +81,23 @@ while running:
                 y_change = -10
                 x_change = 0
                 y_change = -y_change
-
-            
-    # snake.move() 
-    snake_group.update()
-    food_group.update()
-        
+                
+    # snake_group.update()
+    # food_group.update()
+    
+    collide(x,y)
     SCREEN.fill(BLACK)
     
     # for sprite in snake_group.sprites(): 
-    x += x_change
-    y += y_change
+    for segment in snake.SNAKE: 
+        pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(segment[0], segment[1], SNAKE_WIDTH, SNAKE_WIDTH))
+    for segment in snake.SNAKE: 
+        segment[0] += x_change
+        segment[1] += y_change
+    # x += x_change
+    # y += y_change
     
-    pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,25,25))
+    # pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,SNAKE_WIDTH,SNAKE_WIDTH))
     
     pygame.display.update()
     
