@@ -93,7 +93,9 @@ while running:
     snake_obj.move()
 
     # Check for wall/snake collisions
-    collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
+    running = not collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
+    if not running:
+        print("You just lost!")
 
     # Check for food collisions
     if food_collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1]):
