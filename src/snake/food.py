@@ -1,13 +1,15 @@
-import pygame 
+import pygame
 from pygame.sprite import Sprite
 import random
 
 class food(Sprite):
-    def __init__(self, pos):
+    def __init__(self, pos, screen):
         pygame.sprite.Sprite.__init__(self)
         self.position = pos
-        #self.game_screen = screen
-        
+        self.game_screen = screen
+
         def draw(self):
-            self.position = [random.randrange(1, 500), random.randrage(1, 500)]
-            
+            size = 26
+            self.position = [random.randrange(0, 500-size), random.randrage(0, 500-size)]
+            pygame.draw.rect(self.game_screen, (255,255,255),
+            pygame.rect(int(self.position[0]), int(self.position[1]), size, size))
