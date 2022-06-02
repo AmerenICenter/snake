@@ -27,6 +27,8 @@ COLOR = (255, 255, 255)
 BLACK = (0,0,0)
 SNAKE_WIDTH = 12
 
+difficulty = 'easy'
+time_delay = 100
 
 
 # def collide(head_pos, other_pos):
@@ -48,7 +50,6 @@ food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0
 food_obj = food(pos = food_pos, screen = SCREEN, width = size)
 
 def collide(x,y):
-    print(snake_obj.pos_list)
     if x == SCREEN_SIZE or y == SCREEN_SIZE or x == -SNAKE_WIDTH or y == -SNAKE_WIDTH:
         print("Collide Wall")
         return True
@@ -72,18 +73,33 @@ while running:
             if event.type==pygame.QUIT:
                 running=False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
+                if event.key == pygame.K_1:
+                    difficulty = 'easy'
+                    time_delay = 100
+                elif event.key == pygame.K_2:
+                    difficulty = 'medium'
+                    time_delay = 50
+                elif event.key == pygame.K_3:
+                    difficulty = 'hard'
+                    time_delay = 25
+                elif event.key == pygame.K_RETURN:
                     title = False
                     SCORE = 0
         SCREEN.fill(BLACK)
-        EASY = FONT.render('easy', True, COLOR)
+        WELCOME_TITLE = FONT.render("Welcome to Snake!", True, COLOR)
+        SCREEN.blit(WELCOME_TITLE, (120, 60))
+        EASY = FONT.render('Press 1: Easy', True, COLOR)
         SCREEN.blit(EASY, (120,120))
-        MEDIUM = FONT.render('medium', True, COLOR)
-        SCREEN.blit(MEDIUM, (120,240))
-        HARD = FONT.render('hard', True, COLOR)
-        SCREEN.blit(HARD, (120,360))
+        MEDIUM = FONT.render('Press 2: Medium', True, COLOR)
+        SCREEN.blit(MEDIUM, (120,180))
+        HARD = FONT.render('Press 3: Hard', True, COLOR)
+        SCREEN.blit(HARD, (120,240))
+        CURR_DIFF = FONT.render("Current difficulty: " + difficulty, True, COLOR)
+        SCREEN.blit(CURR_DIFF, (120, 360))
+        PRESS_ENTER = FONT.render("Press enter to start!", True, COLOR)
+        SCREEN.blit(PRESS_ENTER, (120, 420))
     else:
-        pygame.time.delay(100)
+        pygame.time.delay(time_delay)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -117,6 +133,7 @@ while running:
         # Check for food collisions
         if food_collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1]):
             snake_obj.eat()
+            SCORE += 1
             food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1)]
             food_obj = food(pos = food_pos, screen = SCREEN, width = size)
         else:
