@@ -16,6 +16,9 @@ class Direction(Enum):
 
 # jash bare bones screen code
 pygame.init()
+pygame.font.init()
+FONT = pygame.font.SysFont('Corbel', 30)
+
 SCREEN_SIZE = 480
 SCREEN = pygame.display.set_mode([SCREEN_SIZE, SCREEN_SIZE])
 WIDTH = SCREEN.get_width()
@@ -24,10 +27,7 @@ COLOR = (255, 255, 255)
 BLACK = (0,0,0)
 SNAKE_WIDTH = 12
 
-FONT = pygame.font.SysFont('Corbel', 30)
-EASY = FONT.render('easy', True, COLOR)
-MEDIUM = FONT.render('medium', True, COLOR)
-HARD = FONT.render('hard', True, COLOR)
+
 
 # def collide(head_pos, other_pos):
     # if collide with walls
@@ -67,55 +67,72 @@ def food_collide(x, y, food_x, food_y):
         return False
 
 while running:
-    # if (title):
-    #     pass
-    # else:
-    pygame.time.delay(250)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN:
-            # checkKeyPress()
-            if event.key == pygame.K_LEFT:
-                print("Left")
-                snake_obj.direction = 2
-            elif event.key == pygame.K_RIGHT:
-                print("RIGHT")
-                snake_obj.direction = 3
-            elif event.key == pygame.K_UP:
-                print("UP")
-                snake_obj.direction = 0
-            elif event.key == pygame.K_DOWN:
-                print("DOWN")
-                snake_obj.direction = 1
-
-    # Move snake after direction change
-    snake_obj.move()
-
-    # Check for wall/snake collisions
-    running = not collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
-    if not running:
-        print("You just lost!")
-
-    # Check for food collisions
-    if food_collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1]):
-        snake_obj.eat()
-        food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1)]
-        food_obj = food(pos = food_pos, screen = SCREEN, width = size)
+    if (title):
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                running=False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    title = False
+                    SCORE = 0
+        SCREEN.fill(BLACK)
+        EASY = FONT.render('easy', True, COLOR)
+        SCREEN.blit(EASY, (120,120))
+        MEDIUM = FONT.render('medium', True, COLOR)
+        SCREEN.blit(MEDIUM, (240,240))
+        HARD = FONT.render('hard', True, COLOR)
+        SCREEN.blit(HARD, (360,360))
     else:
-        pass
-        #print(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1])
-    # Update the screen
-    SCREEN.fill(BLACK)
+        pygame.time.delay(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                # checkKeyPress()
+                if event.key == pygame.K_LEFT:
+                    if snake_obj.direction != 3:
+                        print("Left")
+                        snake_obj.direction = 2
+                elif event.key == pygame.K_RIGHT:
+                    if snake_obj.direction!= 2:
+                        print("RIGHT")
+                        snake_obj.direction = 3
+                elif event.key == pygame.K_UP:
+                    if snake_obj.direction != 1:
+                        print("UP")
+                        snake_obj.direction = 0
+                elif event.key == pygame.K_DOWN:
+                    if snake_obj.direction != 0:
+                        print("DOWN")
+                        snake_obj.direction = 1
 
-    # Draw snake and food
-    for segment in snake_obj.pos_list:
-        pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(segment[0], segment[1], SNAKE_WIDTH, SNAKE_WIDTH))
-    food_obj.draw()
+        # Move snake after direction change
+        snake_obj.move()
 
-    # pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,SNAKE_WIDTH,SNAKE_WIDTH))
+        # Check for wall/snake collisions
+        running = not collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
+        if not running:
+            print("You just lost!")
 
-    pygame.display.update()
+        # Check for food collisions
+        if food_collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1]):
+            snake_obj.eat()
+            food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1)]
+            food_obj = food(pos = food_pos, screen = SCREEN, width = size)
+        else:
+            pass
+            #print(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1])
+        # Update the screen
+        SCREEN.fill(BLACK)
+
+        # Draw snake and food
+        for segment in snake_obj.pos_list:
+            pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(segment[0], segment[1], SNAKE_WIDTH, SNAKE_WIDTH))
+        food_obj.draw()
+
+        # pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,SNAKE_WIDTH,SNAKE_WIDTH))
+
+        pygame.display.update()
 
 
 pygame.quit()
