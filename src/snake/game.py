@@ -28,6 +28,18 @@ HARD = FONT.render('hard', True, COLOR)
 snake_group = pygame.sprite.Group() 
 food_group = pygame.sprite.Group()
 
+
+
+# def collide(head_pos, other_pos): 
+    # if collide with walls
+    # if collide with self
+title = True
+running = True
+x_change = 10
+y_change = 0
+x = 200
+y = 200
+
 def checkKeyPress():
     if event.key == pygame.K_LEFT:
         print("Left")
@@ -42,14 +54,6 @@ def checkKeyPress():
         print("DOWN")
         pass 
 
-# def collide(head_pos, other_pos): 
-    # if collide with walls
-    # if collide with self
-title = True
-running = True
-x=10
-y = 10
-
 while running:
     # if (title): 
     #     pass
@@ -59,7 +63,28 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            checkKeyPress() 
+            # checkKeyPress() 
+            if event.key == pygame.K_LEFT:
+                print("Left")
+                x_change = 10
+                y_change = 0
+                x_change = -x_change
+            elif event.key == pygame.K_RIGHT:
+                print("ROIGHT")
+                x_change = -10
+                y_change = 0 
+                x_change = -x_change
+            elif event.key == pygame.K_UP: 
+                print("UOP")
+                y_change = 10
+                x_change = 0
+                y_change = -y_change
+            elif event.key == pygame.K_DOWN:
+                print("DOWN")
+                y_change = -10
+                x_change = 0
+                y_change = -y_change
+
             
     # snake.move() 
     snake_group.update()
@@ -68,10 +93,11 @@ while running:
     SCREEN.fill(BLACK)
     
     # for sprite in snake_group.sprites(): 
-    x +=15
-    y+=15
-    pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,30,30))
-   
+    x += x_change
+    y += y_change
+    
+    pygame.draw.rect(SCREEN, (255,255,0), pygame.Rect(x,y,25,25))
+    
     pygame.display.update()
     
 
