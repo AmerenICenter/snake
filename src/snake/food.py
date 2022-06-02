@@ -8,8 +8,8 @@ class food(Sprite):
         self.position = pos
         self.game_screen = screen
 
-        def draw(self):
-            size = 26
-            self.position = [random.randrange(0, 500-size), random.randrage(0, 500-size)]
-            pygame.draw.rect(self.game_screen, (255,255,255),
-            pygame.rect(int(self.position[0]), int(self.position[1]), size, size))
+    def draw(self):
+        size = 26
+        # self.position = [random.randrange(0, 500-size), random.randrage(0, 500-size)]
+        pygame.draw.rect(self.game_screen, (255,255,255),
+        pygame.rect(int(self.position[0]), int(self.position[1]), size, size))
