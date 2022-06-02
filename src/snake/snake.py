@@ -1,35 +1,41 @@
-import pygame 
+import pygame
 from pygame.sprite import Sprite
 import random
 
 class snake():
-    
-    def __init__(self, s, dir, pos, len):
-        LENGTH = 3
-        COLOR = (0,0,255)
+
+    def __init__(self, dir, pos_list, length, width, screen):
+        self.COLOR = (0,0,255)
         # print('hi')
         pygame.sprite.Sprite.__init__(self)
-        self.speed = s
         self.direction = dir
-        self.position = pos
-        self.length = len
+        self.pos_list = pos_list
+        self.length = length
+        self.width = width
+        self.screen = screen
+        self.last_tail_position = [0,0]
 
-    def move(self, pos_list, curr_pos):
+    def move(self):
         # snake_len = 3 # to change later
 
         # for i in range (snake_len):
             # self.position[i] += self.speed[i]
-        
-        pos_list.insert(0, curr_pos)
 
-    def eat(self, pos_list, curr_pos):
-        pos_list.insert(0, curr_pos)
+        self.last_tail_position = self.pos_list[-1]
+        if self.direction == 0:
+            head_pos = self.pos_list[0] + [0, self.width]
+        if self.direction == 1:
+            head_pos = self.pos_list[0] - [0, self.width]
+        if self.direction == 2:
+            head_pos = self.pos_list[0] - [self.width, 0]
+        if self.direction == 3:
+            head_pos = self.pos_list[0] + [self.width, 0]
+        self.pos_list.insert(0, head_pos)
+        del self.pos_list[-1]
+
+    def eat(self):
+        self.pos_list.insert(self.last_tail_position)
         self.length += 1
 
-    def draw(self, game, screen):
-        game.draw.rect(screen, self.COLOR, 3, 3)
-
-    
-
-
-
+    # def draw(self):
+    #     pygame.draw.rect(self.screen, self.COLOR, pygame.rect(pos, pos, self.width, self.width))
