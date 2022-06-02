@@ -47,13 +47,14 @@ food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0
 
 food_obj = food(pos = food_pos, screen = SCREEN, width = size)
 
-
 def collide(x,y):
+    print(snake_obj.pos_list[0])
     if x == SCREEN_SIZE - SNAKE_WIDTH or y == SCREEN_SIZE - SNAKE_WIDTH or x == SNAKE_WIDTH or y == SNAKE_WIDTH:
-        print("Collide")
+        print("Collide Wall")
         return True
-    for block in snake_obj.pos_list[:-1]:
-        if block == snake_obj:
+    for block in snake_obj.pos_list[1:]:
+        if block == snake_obj.pos_list[0]:
+            print("Collide Self")
             return True
     else:
         return False
@@ -92,7 +93,7 @@ while running:
     snake_obj.move()
 
     # Check for wall/snake collisions
-    collide(snake_obj.pos_list[0], snake_obj.pos_list[1])
+    collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1])
 
     # Check for food collisions
     if food_collide(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1]):
@@ -100,7 +101,8 @@ while running:
         food_pos = [12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1), 12*random.randint(0, SCREEN_SIZE/SNAKE_WIDTH-1)]
         food_obj = food(pos = food_pos, screen = SCREEN, width = size)
     else:
-        print(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1])
+        pass
+        #print(snake_obj.pos_list[0][0], snake_obj.pos_list[0][1], food_pos[0], food_pos[1])
     # Update the screen
     SCREEN.fill(BLACK)
 
