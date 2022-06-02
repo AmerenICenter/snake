@@ -14,6 +14,7 @@ class Direction(Enum):
     RIGHT = 3
 
 # jash bare bones screen code
+NAME = input("Enter your name: ")
 pygame.init()
 pygame.font.init()
 FONT = pygame.font.SysFont('Corbel', 30)
@@ -126,6 +127,10 @@ while running:
         if not running:
             with open('score.txt', 'a') as f:
                 f.write(str(SCORE))
+                f.write(', ')
+                f.write(difficulty)
+                f.write(', ')
+                f.write(NAME)
                 f.write('\n')
             print("You just lost!")
 
