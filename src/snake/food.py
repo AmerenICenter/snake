@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 import random
+import numpy as np 
 
 class food(Sprite):
     def __init__(self, pos, screen, width):
@@ -10,6 +11,6 @@ class food(Sprite):
         self.screen = screen
 
     def draw(self):
-        # self.position = [random.randrange(0, 500-size), random.randrage(0, 500-size)]
+        # self.position = [random.randrange(0, 500-size), random.randrange(0, 500-size)]
         pygame.draw.rect(self.screen, (255,255,255),
         pygame.Rect(int(self.position[0]), int(self.position[1]), self.width, self.width))

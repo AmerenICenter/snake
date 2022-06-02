@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 import random
+import numpy as np
 
 class snake():
 
@@ -20,21 +21,26 @@ class snake():
 
         # for i in range (snake_len):
             # self.position[i] += self.speed[i]
-
+        head_pos = [-1, -1]
         self.last_tail_position = self.pos_list[-1]
         if self.direction == 0:
-            head_pos = self.pos_list[0] + [0, self.width]
+            head_pos[0] = self.pos_list[0][0]
+            head_pos[1] = self.pos_list[0][1] - self.width
         if self.direction == 1:
-            head_pos = self.pos_list[0] - [0, self.width]
+            head_pos[0] = self.pos_list[0][0]
+            head_pos[1]= self.pos_list[0][1] + self.width
         if self.direction == 2:
-            head_pos = self.pos_list[0] - [self.width, 0]
+            head_pos[0] = self.pos_list[0][0] - self.width
+            head_pos[1] = self.pos_list[0][1]
         if self.direction == 3:
-            head_pos = self.pos_list[0] + [self.width, 0]
+            head_pos[0] = self.pos_list[0][0] + self.width
+            head_pos[1] = self.pos_list[0][1]
         self.pos_list.insert(0, head_pos)
         del self.pos_list[-1]
 
     def eat(self):
-        self.pos_list.insert(self.last_tail_position)
+        self.pos_list.append(self.last_tail_position)
+        print("position list",self.pos_list)
         self.length += 1
 
     # def draw(self):
