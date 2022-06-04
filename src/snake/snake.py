@@ -2,7 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 import random
 
-class snake():
+class Snake():
 
     def __init__(self, dir, pos_list, length, width, screen):
         self.COLOR = (0,0,255)

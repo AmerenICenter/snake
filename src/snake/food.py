@@ -2,7 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 import random
 
-class food(Sprite):
+class Food(Sprite):
     def __init__(self, pos, screen, width):
         pygame.sprite.Sprite.__init__(self)
         self.position = pos

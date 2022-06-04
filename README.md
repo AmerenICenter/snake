@@ -44,4 +44,6 @@ Archit Myadam,
 David An,
 Jash Parekh,
 Myles Ream,
-Xander Pero
+Xander Pero,
+Jack Aubry,
+Ritika Patel

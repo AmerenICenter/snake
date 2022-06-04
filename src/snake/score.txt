@@ -1,3 +1,0 @@
-score, difficulty, name
-0, easy, sdan
-0, medium, ncie 
